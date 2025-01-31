@@ -4,6 +4,8 @@ using NAudio.Wave;
 using System.Text.RegularExpressions;
 using NAudio.CoreAudioApi;
 using System.Collections;
+using System.Timers;
+using NAudio.Wave.SampleProviders;
 
 namespace MasterofCeremonies 
 {
@@ -13,14 +15,20 @@ namespace MasterofCeremonies
         private static AudioFileReader audioFile;
         private static bool paused = false;
         private static long bookmark;
+        private static ConcatenatingSampleProvider playlist;
 
         private static int turt = 0; //counter for audio clips to be inserted into the clips Queue
         private static int les = 0; //counter for how many audio clips remain, so that we can determine when to play the closer clip
-        private static Queue<String> clips = new Queue<String>();
-        private static List<String> meatClips = new List<String>();
-        private static List<String> potatoClips = new List<String>();
+        private static Queue<String> clips = new Queue<String>(); //clips to be processed
+        private static List<String> meatClips = new List<String>(); //pool 1
+        private static List<String> potatoClips = new List<String>(); //pool 2
+        private static Queue<AudioFileReader> april = new Queue<AudioFileReader>(); //clips processed but not yet reached
+
         private static bool playingTurtles = false;
         private static Random random = new Random();
+        private static System.Timers.Timer clock;
+        private static object lockObject = new object();
+
 
         static void Main(string[] args)
         {
@@ -33,6 +41,11 @@ namespace MasterofCeremonies
             potatoClips.Add("TeenageBrothers"); //intermediary clips
             potatoClips.Add("TeenageBrothers1234");
             potatoClips.Add("ShellOfATime");
+
+            clock = new System.Timers.Timer(5000);
+            clock.Elapsed += Zeroed;
+            clock.AutoReset = true;
+            clock.Enabled = true;
 
             Console.WriteLine("Give me the audio.");
             string inputAudio = Console.ReadLine();
@@ -82,11 +95,11 @@ namespace MasterofCeremonies
                     Environment.Exit(0);
                     break;
                 case "T":
-                    turt ++;//stack Turtles uses to build a Turtles combo, every time you enter T
+                    turt ++; //stack Turtles uses to build a Turtles combo, every time you enter T
                     Turtles();
                     break;
                 default:
-                    Console.Write("Try entering P or S to Pause or Stop respectively, or R to resume. Enter E to end.");
+                    Console.Write("Try entering P or S or R to Pause or Stop or Resume respectively. Enter E to End, or T to Turtles.");
                     break;
             }
         }
@@ -144,12 +157,6 @@ namespace MasterofCeremonies
 
         static void Turtles() //buffer class to manage Turtles counter, turt
         {
-            if (!playingTurtles)
-            {
-                Shredder(); //if it isn't already playing, play the Turtles audio
-                playingTurtles = true;
-            }
-
             clips.Enqueue(meatClips[random.Next(5)]);
             if (clips.Count % 3 == 0)
             {
@@ -159,11 +166,60 @@ namespace MasterofCeremonies
             turt -= 1;
         }
 
-        //idea: have a regular check every few seconds for detecting new clips to add, so as to tack it on at the end of a clip.
-        //idea: two arrays, refresh one array when it is exhausted, and fill it up with the contents of a filler third array, tacking the second array on using FollowedBy().
-        static void Shredder() //plays Turtles until quota is met
+        private static void Zeroed(Object source, ElapsedEventArgs e)
         {
-            //exhaust the queue, assigning a random timestamp for each entry.
+            lock (lockObject)
+            {
+                if(april.Count > 0)
+                {
+                    april.Dequeue();
+                    if (clips.Count > 0)
+                    {
+                        Shredder(clips.Dequeue());
+                    }
+                }
+                else
+                {
+                    var endClip = new AudioFileReader("audio/End.mp3");
+                    april.Enqueue(endClip);
+                    playlist = new ConcatenatingSampleProvider(new[] { endClip });
+                    outputDevice = new WaveOutEvent();
+                    outputDevice.Init(playlist);
+                    outputDevice.Play();
+
+                    playingTurtles = false;
+                }
+            }
+            
+        }
+
+        //idea: two arrays, refresh one array when it is exhausted, and fill it up with the contents of a filler third array, tacking the second array on using FollowedBy().
+        static void Shredder(String clipA) //plays Turtles until quota is met
+        {
+            var sampleB = new AudioFileReader("audio/" + clipA + ".mp3");
+            lock (lockObject)
+            {
+                if (!playingTurtles)
+                {
+                    var sampleA = new AudioFileReader("audio/" + "CountItOff" + ".mp3");
+                    april.Enqueue(sampleA);
+                    april.Enqueue(sampleB);
+                    playlist = new ConcatenatingSampleProvider(new[] { sampleA, sampleB });
+                    playingTurtles = true;
+                }
+                else
+                {
+                    april.Enqueue(sampleB);
+                    playlist = new ConcatenatingSampleProvider(april);
+                }
+
+                if (outputDevice == null || outputDevice.PlaybackState != PlaybackState.Playing)
+                {
+                    outputDevice = new WaveOutEvent();
+                    outputDevice.Init(playlist);
+                    outputDevice.Play();
+                }
+            }
             
             //if the queue is empty, play a finisher.
             //do not relinquish user control during this process (assume it's fine. If it isn't, do something about it).

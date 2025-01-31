@@ -8,6 +8,56 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="audio\Clank.mp3" />
+    <None Remove="audio\CountItOff.mp3" />
+    <None Remove="audio\End.mp3" />
+    <None Remove="audio\NeverLetUsDown.mp3" />
+    <None Remove="audio\NoClank.mp3" />
+    <None Remove="audio\ShellOfATime.mp3" />
+    <None Remove="audio\TeenageBrothers.mp3" />
+    <None Remove="audio\TeenageBrothers1234.mp3" />
+    <None Remove="audio\TMNT2003.mp3" />
+    <None Remove="audio\WatchOutForShredder.mp3" />
+    <None Remove="audio\WeShreddedShredder.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="audio\Clank.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\CountItOff.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\End.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\NeverLetUsDown.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\NoClank.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\ShellOfATime.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\TeenageBrothers.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\TeenageBrothers1234.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\TMNT2003.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\WatchOutForShredder.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="audio\WeShreddedShredder.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NAudio" Version="2.2.1" />
   </ItemGroup>
 

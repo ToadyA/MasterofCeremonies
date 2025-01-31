@@ -20,3 +20,15 @@ C:\Users\ToadyA\source\repos\MasterofCeremonies\obj\Debug\net8.0\refint\Masterof
 C:\Users\ToadyA\source\repos\MasterofCeremonies\obj\Debug\net8.0\MasterofCeremonies.pdb
 C:\Users\ToadyA\source\repos\MasterofCeremonies\obj\Debug\net8.0\MasterofCeremonies.genruntimeconfig.cache
 C:\Users\ToadyA\source\repos\MasterofCeremonies\obj\Debug\net8.0\ref\MasterofCeremonies.dll
+C:\Users\ToadyA\source\repos\MasterofCeremonies\obj\Debug\net8.0\MasterofCeremonies.sourcelink.json
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\Clank.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\CountItOff.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\End.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\NeverLetUsDown.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\NoClank.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\ShellOfATime.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\TeenageBrothers.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\TeenageBrothers1234.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\TMNT2003.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\WatchOutForShredder.mp3
+C:\Users\ToadyA\source\repos\MasterofCeremonies\bin\Debug\net8.0\audio\WeShreddedShredder.mp3
