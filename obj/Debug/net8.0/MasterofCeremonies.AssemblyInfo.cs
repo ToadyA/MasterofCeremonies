@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MasterofCeremonies")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e17992e42ee0543c7926de1f52f7c52fc34b0b10")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e00ba7b5b99e457736d2292aea5a233ab8ce35c")]
 [assembly: System.Reflection.AssemblyProductAttribute("MasterofCeremonies")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MasterofCeremonies")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
