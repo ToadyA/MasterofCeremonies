@@ -34,6 +34,8 @@ namespace MasterofCeremonies
 
         static void Main(string[] args)
         {
+            //clips snipped from https:// youtu.be/n-zqjplxN1o?si=y6RuomcoNkrxwiWP
+
             meatClips.Add("NeverLetUsDown"); //fullbody clips in threes
             meatClips.Add("WeShreddedShredder");
             meatClips.Add("WatchOutForShredder");
